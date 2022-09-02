@@ -1,42 +1,65 @@
-// import React, { Component } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { addContact, deleteContact, setContact } from '../../redux/Slice';
-import { useGetContactsQuery } from '../../redux/Helpers';
-import { useState } from 'react';
-import css from './App.module.css';
-import ContactForm from '../ContactForm/ContactForm';
-import ContactList from '../ContactList/ContactList';
-import Filter from '../Filter/Filter';
+import { Routes, Route } from 'react-router-dom';
 
-export function App() {
-  const [filter, setFilter] = useState('');
-  const { data } = useGetContactsQuery();
+import { useDispatch, useSelector } from 'react-redux';
+import { getIsLoggedIn } from '../../redux/auth/authSelectors';
+import { fetchCurrentUser } from '../../redux/auth/authOperations';
+import { useEffect, Suspense, lazy } from 'react';
+import Loader from '../../components/Loader/Loader';
 
-  const isVisibleContacts = () => {
-    if (data) {
-      if (data.length !== 0) {
-        return data.filter(contact =>
-          contact.name.toLowerCase().includes(filter.toLowerCase())
-        );
-      }
-    }
-    return;
-  };
+const AppBar = lazy(() => import('components/AppBar/AppBar'));
+const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
+const PhoneBook = lazy(() => import('../PhoneBook/PhoneBook'));
+const Login = lazy(() => import('../../pages/LoginPage/LoginPage'));
+const Register = lazy(() => import('../../pages/RegisterPage/RegisterPage'));
+const PrivateRoute = lazy(() => import('../PrivateRoute/PrivateRoute'));
+const PublicRoute = lazy(() => import('../PublicRoute/PublicRoute'));
 
-  const changeFilter = e => {
-    setFilter(e.target.value);
-  };
+export const App = () => {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector(getIsLoggedIn);
+
+  useEffect(() => {
+    dispatch(fetchCurrentUser());
+  }, [dispatch]);
 
   return (
-    <div className={css.container}>
-      <h1 className={css.title}>Phonebook</h1>
-      <div className={css.wrap}>
-        <ContactForm />
-      </div>
-      <h2 className={css.titleSection}>Contacts</h2>
+    <>
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route path="/" element={<AppBar />}>
+            <Route
+              index
+              element={
+                <PublicRoute isLoggedIn={isLoggedIn} redirectPath="/contacts">
+                  <HomePage />
+                </PublicRoute>
+              }
+            />
 
-      <Filter filter={filter} onChange={changeFilter} />
-      <ContactList contacts={isVisibleContacts()} />
-    </div>
+            <Route
+              element={
+                <PublicRoute
+                  redirectPath="/contacts"
+                  isLoggedIn={isLoggedIn}
+                  restricted
+                />
+              }
+            >
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+            </Route>
+
+            <Route
+              path="/contacts"
+              element={
+                <PrivateRoute isLoggedIn={isLoggedIn} redirectPath="/login">
+                  <PhoneBook />
+                </PrivateRoute>
+              }
+            />
+          </Route>
+        </Routes>
+      </Suspense>
+    </>
   );
-}
+};

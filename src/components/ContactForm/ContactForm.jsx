@@ -1,44 +1,46 @@
 // import React, { Component } from 'react';
 import { useState } from 'react';
-
-import css from './ContactForm.module.css';
+import { useSelector, useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { addContact } from '../../redux/contacts/contactOperations';
 import {
-  useAddContactMutation,
-  useGetContactsQuery,
-} from '../../redux/Helpers';
+  getContacts,
+  getIsRefreshing,
+} from '../../redux/contacts/contactsSelectors';
+
+import css from './ContactForm.module.css';
 
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const { data } = useGetContactsQuery();
-  const [addContact] = useAddContactMutation();
+  const dispatch = useDispatch();
+  const contacts = useSelector(getContacts);
+  const isChanging = useSelector(getIsRefreshing);
 
-  const handleChange = e => {
-    if (e.target.name === 'name') {
-      setName(e.target.value);
+  const handleChange = evt => {
+    if (evt.target.name === 'name') {
+      setName(evt.target.value);
     }
-
-    if (e.target.name === 'number') {
-      setNumber(e.target.value);
+    if (evt.target.name === 'number') {
+      setNumber(evt.target.value);
     }
   };
 
-  const handleSubmit = async e => {
-    e.preventDefault();
+  const handleSubmit = evt => {
+    evt.preventDefault();
+
     if (
-      data.find(
+      contacts.find(
         contact => contact.name.toLocaleLowerCase() === name.toLocaleLowerCase()
       )
     ) {
       reset();
-      return toast.warning(`${name} alredy have`);
+      return toast.warning(`${name} is alredy in contacts`);
     }
 
     if (name && number) {
-      await addContact({ name: name, phone: number });
-      toast.success(`Done`);
+      dispatch(addContact({ name: name, number: number }));
       reset();
     }
   };

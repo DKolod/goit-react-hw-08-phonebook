@@ -7,9 +7,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 18px;
-
-
+  background-color: #eff2e9;
 }
 
 code {
@@ -33,7 +31,7 @@ ul {
   margin: 0;
 }
 
-a {
+a{
   text-decoration: none;
 }
 
@@ -56,3 +54,4 @@ button:hover {
   background-color: #172f78;
   color: #fff;
 }
+

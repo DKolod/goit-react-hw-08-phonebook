@@ -1,26 +1,58 @@
-import { useDeleteContactMutation } from '../../redux/Helpers';
-import css from './ContactList.module.css';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import css from './ContactList.module.css';
+import {
+  editContact,
+  deleteContact,
+} from '../../redux/contacts/contactOperations';
+import { getContacts } from '../../redux/contacts/contactsSelectors';
 
-const ContactItem = ({ id, name, phone }) => {
-  const [deleteContact] = useDeleteContactMutation();
-  const handleDeleteContact = async id => {
-    await deleteContact(id);
-    toast.error('Deleted', {
-      duration: 2000,
-    });
+const ContactItem = ({ id, name, number }) => {
+  const [changeName, setChangeName] = useState(name);
+  const [changeNumber, setChangeNumber] = useState(number);
+  const [changeContact, setChangeContact] = useState(false);
+  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
+
+  const handelChengeContact = () => {
+    if (changeContact) {
+      if (name === changeName && number === changeNumber) {
+        setChangeContact(!changeContact);
+        return;
+      }
+      if (
+        contacts.find(
+          contact =>
+            contact.name.toLocaleLowerCase() ===
+              changeName.toLocaleLowerCase() && contact.id !== id
+        )
+      ) {
+        toast.warning(`${changeName} is alredy in contacts`);
+        return;
+      }
+      dispatch(
+        editContact({
+          id,
+          name: changeName,
+          number: changeNumber,
+        })
+      );
+    }
+    setChangeContact(!changeContact);
   };
 
   return (
-    <li key={id} className={css.item}>
-      <p>
-        {name}: {phone}
-      </p>
+    <li className={css.item} id={id}>
+      <div className={css.valueWrap}>
+        <span className={css.name}>{name}: </span>
+        <span>{number}</span>
+      </div>
       <button
         className={css.btnDelete}
         type="button"
-        onClick={() => handleDeleteContact(id)}
+        onClick={() => dispatch(deleteContact(id))}
       >
         Delete
       </button>
