@@ -6,11 +6,11 @@ import { getIsLoggedIn } from '../../redux/auth/authSelectors';
 
 import Loader from '../../components/Loader/Loader';
 
-const AppBar = lazy(() => import('components/AppBar/AppBar'));
-const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
+const HomePage = lazy(() => import('../../pages/Home/HomePage'));
 const PhoneBook = lazy(() => import('../PhoneBook/PhoneBook'));
-const Login = lazy(() => import('../../pages/LoginPage/LoginPage'));
-const Register = lazy(() => import('../../pages/RegisterPage/RegisterPage'));
+const AppBar = lazy(() => import('components/AppBar/AppBar'));
+const Login = lazy(() => import('../../pages/Login/LoginPage'));
+const Register = lazy(() => import('../../pages/Register/RegisterPage'));
 const PrivateRoute = lazy(() => import('../PrivateRoute/PrivateRoute'));
 const PublicRoute = lazy(() => import('../PublicRoute/PublicRoute'));
 

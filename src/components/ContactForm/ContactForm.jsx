@@ -33,7 +33,7 @@ export default function ContactForm() {
       )
     ) {
       reset();
-      return toast.warning(`${name} is alredy in contacts`);
+      return toast.warning(`${name} Alredy have`);
     }
 
     if (name && number) {
@@ -79,7 +79,7 @@ export default function ContactForm() {
         />
       </label>
       <button type="submit">Add contact</button>
-      <ToastContainer theme="colored" autoClose={2000} />
+      <ToastContainer autoClose={2000} />
     </form>
   );
 }

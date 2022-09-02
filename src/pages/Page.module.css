@@ -51,13 +51,18 @@ font-size: 22px;
     font-weight: 900;
 }
 .pageLink:hover {
-    color: #42d824;
+    color: #000000;
     
     
 }
 .pageBtn{
     margin-top: 20px;
-    background-color: rgba(82, 97, 231, 0.623);
+    background-color: rgba(163, 163, 163, 0.973);
+}
+.pageBtn:hover {
+    background-color: #47aa33;
+
+
 }
 .titleHomePng {
     margin: auto;

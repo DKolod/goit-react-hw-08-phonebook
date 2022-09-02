@@ -1,6 +1,6 @@
 .header{
     background: linear-gradient(to right, blue, pink);
-    padding: 20px 50px;
+    padding: 25px 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -29,7 +29,7 @@
 
 .homeLinc:hover,
 .homeLinc:focus {
-    color: #3fdb18;
+    color: #080807;
 }
 
 .authLinc {
@@ -41,6 +41,6 @@
 
 .authLinc:hover,
 .authLinc:focus {
-    color: #3fdb18;
+    color: #070706;
     
 }

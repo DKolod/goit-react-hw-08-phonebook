@@ -20,7 +20,7 @@ export const addContact = createAsyncThunk('contacts/addContact',
    async newContact => {
       try {
          const { data } = await axios.post('/contacts', newContact);
-         toast.success(`Contact created.`);
+         toast.success(`Done`);
          return data;
       } catch (error) {
          console.log(error.message);
@@ -32,7 +32,7 @@ export const deleteContact = createAsyncThunk('contacts/deleteContact',
    async contactId => {
       try {
          await axios.delete(`/contacts/${contactId}`);
-         toast.success(`Contact deleted`, { theme: "dark" });
+         toast.success(`Deleted`);
          return contactId;
       } catch (error) {
          console.log(error.message);

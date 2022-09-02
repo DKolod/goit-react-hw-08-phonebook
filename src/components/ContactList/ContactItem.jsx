@@ -29,7 +29,7 @@ const ContactItem = ({ id, name, number }) => {
               changeName.toLocaleLowerCase() && contact.id !== id
         )
       ) {
-        toast.warning(`${changeName} is alredy in contacts`);
+        toast.warning(`${changeName} Alredy have`);
         return;
       }
       dispatch(

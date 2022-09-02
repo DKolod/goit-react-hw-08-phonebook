@@ -1,15 +1,20 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { NavLink } from 'react-router-dom';
-import { logIn } from '../../redux/auth/authOperations';
+// import { NavLink } from 'react-router-dom';
+import { register } from '../../redux/auth/authOperations';
 import css from '../Page.module.css';
 
-export default function LoginPage() {
+export default function RegisterPage() {
   const dispatch = useDispatch();
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleChange = e => {
+    if (e.target.name === 'name') {
+      setName(e.target.value);
+    }
+
     if (e.target.name === 'email') {
       setEmail(e.target.value);
     }
@@ -20,19 +25,30 @@ export default function LoginPage() {
   };
 
   const reset = () => {
+    setName('');
     setEmail('');
     setPassword('');
   };
 
-  const handleSubmit = async evt => {
-    evt.preventDefault();
-    dispatch(logIn({ email, password }));
+  const handleSubmit = async e => {
+    e.preventDefault();
+    dispatch(register({ name, email, password }));
     reset();
   };
 
   return (
     <form onSubmit={handleSubmit} className={css.form}>
-      <h2>Please login</h2>
+      <h2>Sign up</h2>
+      <label className={css.label}>
+        <input
+          onChange={handleChange}
+          type="name"
+          name="name"
+          value={name}
+          placeholder="Name"
+          required
+        />
+      </label>
       <label className={css.label}>
         <input
           onChange={handleChange}
@@ -56,12 +72,9 @@ export default function LoginPage() {
       </label>
       <div>
         <button className={css.pageBtn} type="submit">
-          Login
+          Sign up
         </button>
       </div>
-      <NavLink className={css.pageLink} to="/register">
-        To register
-      </NavLink>
     </form>
   );
 }

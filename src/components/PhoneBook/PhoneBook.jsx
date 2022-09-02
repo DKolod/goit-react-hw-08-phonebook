@@ -41,7 +41,7 @@ export default function PhoneBook() {
       </div>
       <h2 className={css.titleSection}>Contacts</h2>
 
-      <Filter filter={filter} onChange={changeFilter} />
+      <Filter filter={filter} onChange={handleFilterInput} />
       <ContactList contacts={isVisibleContacts()} />
     </div>
   );
