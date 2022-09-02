@@ -35,7 +35,6 @@ export const App = () => {
                 </PublicRoute>
               }
             />
-
             <Route
               element={
                 <PublicRoute
@@ -48,7 +47,6 @@ export const App = () => {
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
             </Route>
-
             <Route
               path="/contacts"
               element={
