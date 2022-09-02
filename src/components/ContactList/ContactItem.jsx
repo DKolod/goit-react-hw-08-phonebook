@@ -49,10 +49,11 @@ const ContactItem = ({ id, name, number }) => {
         <span className={css.name}>{name}: </span>
         <span>{number}</span>
       </div>
+
       <button
         className={css.btnDelete}
-        type="button"
         onClick={() => dispatch(deleteContact(id))}
+        onChange={handelChengeContact}
       >
         Delete
       </button>
