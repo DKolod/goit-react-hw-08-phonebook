@@ -16,8 +16,8 @@ export default function PhoneBook() {
     dispatch(changeFilter(value));
   };
 
-  const handleFilterInput = evt => {
-    setFilter(evt.target.value);
+  const handleFilterInput = e => {
+    setFilter(e.target.value);
   };
 
   useEffect(() => {

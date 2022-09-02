@@ -11,18 +11,18 @@ export default function RegisterPage() {
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
 
-    const handleChange = evt => {
+    const handleChange = e => {
      
-     if (evt.target.name === "name") {
-         setName(evt.target.value);
+     if (e.target.name === "name") {
+         setName(e.target.value);
         };
      
-     if (evt.target.name === "email") {
-            setEmail(evt.target.value);
+     if (e.target.name === "email") {
+            setEmail(e.target.value);
           };
           
-      if (evt.target.name === "password") {
-            setPassword(evt.target.value);
+      if (e.target.name === "password") {
+            setPassword(e.target.value);
         };
    };
    
@@ -32,8 +32,8 @@ export default function RegisterPage() {
        setPassword("");
    };
    
-   const handleSubmit = async evt => {
-      evt.preventDefault();
+   const handleSubmit = async e => {
+      e.preventDefault();
       dispatch(register({ name, email, password }));
       reset();
    };
@@ -82,7 +82,7 @@ export default function RegisterPage() {
                   Sign up
                </button>
             </div>
-            <NavLink className={css.pageLink} to="/login">To login form.</NavLink>
+            <NavLink className={css.pageLink} to="/login">To login</NavLink>
          </form>
        );
 };

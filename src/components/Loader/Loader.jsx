@@ -1,11 +1,10 @@
-
-import { Puff } from 'react-loader-spinner';
+import { RevolvingDot } from 'react-loader-spinner';
 import css from './Loader.module.css';
 
 export default function Loader() {
-   return (
-      <div className={css.BoxLoader}>
-         <Puff color="#00BFFF" height={80} width={80} />        
-      </div>
-   );
+  return (
+    <div className={css.BoxLoader}>
+      <RevolvingDot color="#30b407" height={100} width={100} />
+    </div>
+  );
 }

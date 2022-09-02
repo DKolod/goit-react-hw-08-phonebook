@@ -9,7 +9,7 @@ export default function HomePage() {
           className={css.titleHomePng}
           src={welcome}
           alt="user"
-          width="500"
+          width="700"
         />
       </h2>
     </>

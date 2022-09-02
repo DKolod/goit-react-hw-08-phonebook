@@ -10,8 +10,8 @@ import {
 import { getContacts } from '../../redux/contacts/contactsSelectors';
 
 const ContactItem = ({ id, name, number }) => {
-  const [changeName, setChangeName] = useState(name);
-  const [changeNumber, setChangeNumber] = useState(number);
+  const [changeName] = useState(name);
+  const [changeNumber] = useState(number);
   const [changeContact, setChangeContact] = useState(false);
   const contacts = useSelector(getContacts);
   const dispatch = useDispatch();

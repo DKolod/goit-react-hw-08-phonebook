@@ -7,7 +7,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #eff2e9;
+  background-color: #0203008e;
 }
 
 code {
@@ -50,8 +50,5 @@ button {
   border: 1px solid grey;
 }
 
-button:hover {
-  background-color: #172f78;
-  color: #fff;
-}
+
 

@@ -4,10 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { addContact } from '../../redux/contacts/contactOperations';
-import {
-  getContacts,
-  getIsRefreshing,
-} from '../../redux/contacts/contactsSelectors';
+import { getContacts } from '../../redux/contacts/contactsSelectors';
 
 import css from './ContactForm.module.css';
 
@@ -16,7 +13,7 @@ export default function ContactForm() {
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
-  const isChanging = useSelector(getIsRefreshing);
+  // const isChanging = useSelector(getIsRefreshing);
 
   const handleChange = evt => {
     if (evt.target.name === 'name') {

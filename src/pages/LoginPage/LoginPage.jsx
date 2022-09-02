@@ -9,13 +9,13 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleChange = evt => {
-    if (evt.target.name === 'email') {
-      setEmail(evt.target.value);
+  const handleChange = e => {
+    if (e.target.name === 'email') {
+      setEmail(e.target.value);
     }
 
-    if (evt.target.name === 'password') {
-      setPassword(evt.target.value);
+    if (e.target.name === 'password') {
+      setPassword(e.target.value);
     }
   };
 
@@ -57,11 +57,10 @@ export default function LoginPage() {
       <div>
         <button className={css.pageBtn} type="submit">
           Login
-          {/* {isLoading ? 'Login...' : 'Login'} */}
         </button>
       </div>
       <NavLink className={css.pageLink} to="/register">
-        To register form.
+        To register
       </NavLink>
     </form>
   );
