@@ -42,7 +42,6 @@ const ContactItem = ({ id, name, number }) => {
     }
     setChangeContact(!changeContact);
   };
-
   return (
     <li className={css.item} id={id}>
       <div className={css.valueWrap}>
